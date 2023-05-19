@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "629736295793",
+    "project_id": "zr-app-ccdc3",
+    "storage_bucket": "zr-app-ccdc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629736295793:android:a34fed817183a4da633ad0",
+        "android_client_info": {
+          "package_name": "com.example.zr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629736295793-8gbfth46jub8gvgf4v4rehsgl9ja0hd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Hhv0INwKwamibku2Fnz0uWF3sTUO9n4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629736295793-8gbfth46jub8gvgf4v4rehsgl9ja0hd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
