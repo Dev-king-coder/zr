@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:zr/screens/onboarding/screen1.dart';
+import 'package:zr/screens/onboarding/screen2.dart';
+import 'package:zr/screens/onboarding/screen3.dart';
 import 'firebase_options.dart';
 import '../utils/screen_initializer.dart';
 
@@ -24,7 +27,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home:const ScreenInitializer(),
+      home: const ScreenInitializer(),
+      routes: {
+        '/': (context) => const ScreenInitializer(),
+        ScreenOne.routename: (context) => const ScreenOne(),
+        ScreenTwo.routeName: (context) => const ScreenTwo(),
+        ScreenThree.routeName: (context) => const ScreenThree(),
+      },
     );
   }
 }
