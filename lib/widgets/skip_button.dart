@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zr/colors/colors.dart';
+import 'package:zr/helpers/colors.dart';
 import 'package:zr/screens/auth_screen.dart';
 
 class SkipButton extends StatelessWidget {

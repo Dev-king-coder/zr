@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:zr/colors/colors.dart';
+import 'package:zr/helpers/colors.dart';
 
 import '../../utils/gsign_auth.dart';
 

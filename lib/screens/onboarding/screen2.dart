@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zr/colors/colors.dart';
+import 'package:zr/helpers/colors.dart';
 import 'package:zr/screens/onboarding/screen3.dart';
 import 'package:zr/widgets/skip_button.dart';
 

@@ -25,5 +25,5 @@ class CustomTheme {
     400: Color(0xFFAEB7FF),
     700: Color(0xFF95A0FF),
   });
-  static const int accent = 0xFFF4F7FF;
+  static const int accent = 0xFFE1E4FF;
 }
