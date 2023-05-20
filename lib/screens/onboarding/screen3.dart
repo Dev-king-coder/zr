@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zr/colors/colors.dart';
+import 'package:zr/screens/auth_screen.dart';
 
 class ScreenThree extends StatelessWidget {
   static var routeName = 'ScreenThree';
@@ -71,9 +72,8 @@ class ScreenThree extends StatelessWidget {
               ],
             ),
             InkWell(
-              // TODO: Implement Dashboard link
-              onTap: () {},
-              // Navigator.popAndPushNamed(context, DashBoard.routeName),
+              onTap: () =>
+                  Navigator.popAndPushNamed(context, AuthScreen.routeName),
               child: Container(
                   height: 40,
                   width: 100,

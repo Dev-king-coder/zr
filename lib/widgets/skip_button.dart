@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zr/colors/colors.dart';
+import 'package:zr/screens/auth_screen.dart';
 
 class SkipButton extends StatelessWidget {
   const SkipButton({Key? key}) : super(key: key);
@@ -7,8 +8,7 @@ class SkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //TODO:  Navigate to Login Screen
-      // onTap: () => Navigator.popAndPushNamed(context, DashBoard.routeName),
+      onTap: () => Navigator.popAndPushNamed(context, AuthScreen.routeName),
       child: Container(
         height: 30,
         width: 55,

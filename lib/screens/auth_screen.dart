@@ -5,6 +5,7 @@ import 'package:zr/components/auth_widgets/gsign_in_button.dart';
 final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
+  static var routeName = 'authscreen';
   const AuthScreen({super.key});
 
   @override
