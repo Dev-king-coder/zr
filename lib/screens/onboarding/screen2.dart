@@ -63,19 +63,19 @@ class ScreenTwo extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.circle,
                   color: Colors.grey,
                   size: 15,
                 ),
                 Icon(
                   Icons.circle,
-                  color: theme,
+                  color: CustomTheme.theme,
                   size: 15,
                 ),
-                const Icon(
+                Icon(
                   Icons.circle,
                   color: Colors.grey,
                   size: 15,
@@ -88,7 +88,7 @@ class ScreenTwo extends StatelessWidget {
                 height: 40,
                 width: 100,
                 decoration: BoxDecoration(
-                  color: theme,
+                  color: CustomTheme.theme,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: const Icon(

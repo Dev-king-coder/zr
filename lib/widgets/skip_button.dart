@@ -14,12 +14,12 @@ class SkipButton extends StatelessWidget {
         width: 55,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(20)),
-        child: Center(
+        child: const Center(
           child: Text(
             'Skip',
             style: TextStyle(
               fontSize: 14,
-              color: theme,
+              color: CustomTheme.theme,
             ),
           ),
         ),
