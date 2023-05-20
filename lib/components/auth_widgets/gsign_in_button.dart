@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '/utils/authentication.dart';
+import '../../utils/gsign_auth.dart';
 
 class SignInButton extends StatefulWidget {
   const SignInButton({super.key});
@@ -29,16 +29,16 @@ class _SignInButtonState extends State<SignInButton> {
                     _isSignedIn = true;
                   });
                   User? user =
-                      await Authentication.signInWithGoogle(context: context);
+                      await GSignAuth.signInWithGoogle(context: context);
                   setState(() {
                     _isSignedIn = false;
                   });
 
                   if (user != null) {
+                    // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text("Sign in successful!"),
-                        backgroundColor: Theme.of(context).colorScheme.error,
+                      const SnackBar(
+                        content: Text("Sign in successful!"),
                       ),
                     );
                   }
