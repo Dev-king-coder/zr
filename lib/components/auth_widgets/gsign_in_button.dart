@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zr/helpers/colors.dart';
 
 import '../../utils/gsign_auth.dart';
 
@@ -45,25 +46,20 @@ class _SignInButtonState extends State<SignInButton> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(6),
-                  child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        Image.asset(
-                          'lib/assets/images/google_logo.png',
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          'Sign in with Google',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ]),
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: CustomTheme.themeAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset(
+                        'lib/assets/images/google_logo.png',
+                      ),
+                    ),
+                  ),
                 ),
               ));
   }

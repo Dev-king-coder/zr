@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zr/helpers/colors.dart';
 import 'package:zr/components/auth_widgets/gsign_in_button.dart';
+import 'package:zr/helpers/dimensions.dart';
 
 final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
+  static var routeName = 'authscreen';
   const AuthScreen({super.key});
 
   @override
@@ -51,23 +54,35 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 30, bottom: 30, left: 20, right: 20),
-                width: 200,
+              Center(
+                child: SizedBox(
+                  width: Dimensions.getWidth(context) * .6,
+                  child: Image.asset('assets/logo-slim.png'),
+                ),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0, top: 30),
+                child: Text(
+                  'Login to your account',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SingleChildScrollView(
                   child: Form(
                       key: _formKey,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextFormField(
@@ -85,19 +100,18 @@ class _AuthScreenState extends State<AuthScreen> {
                               _enteredEmail = value!;
                             },
                             decoration: InputDecoration(
-                              labelText: 'Email Address',
-                              labelStyle: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                              hintText: 'Email',
+                              labelStyle: const TextStyle(
+                                color: CustomTheme.theme,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                                  color: grey,
                                 ),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.error,
                                 ),
@@ -107,10 +121,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                   color: Theme.of(context).colorScheme.error,
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                                  color: CustomTheme.theme,
                                 ),
                               ),
                             ),
@@ -135,11 +148,10 @@ class _AuthScreenState extends State<AuthScreen> {
                             onSaved: (value) {
                               _enteredPassword = value!;
                             },
-                            cursorColor:
-                                Theme.of(context).colorScheme.onPrimary,
+                            cursorColor: CustomTheme.theme,
                             obscureText: !_passwordVisibility,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                            style: const TextStyle(
+                              color: CustomTheme.theme,
                             ),
                             decoration: InputDecoration(
                               suffixIcon: _passwordVisibility
@@ -165,19 +177,18 @@ class _AuthScreenState extends State<AuthScreen> {
                                         });
                                       },
                                     ),
-                              labelStyle: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                              labelStyle: const TextStyle(
+                                color: CustomTheme.theme,
                               ),
-                              labelText: "Password",
+                              hintText: "Password",
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                                  color: grey,
                                 ),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.error,
                                 ),
@@ -187,57 +198,88 @@ class _AuthScreenState extends State<AuthScreen> {
                                   color: Theme.of(context).colorScheme.error,
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                                  color: CustomTheme.theme,
                                 ),
                               ),
                             ),
                           ),
                           const SizedBox(height: 30),
-                          ElevatedButton(
-                            onPressed: _submitForm,
-                            child: Text(_isLogin ? "Login" : "SignUp"),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: <Widget>[
-                              const Expanded(
-                                  child: Divider(
-                                color: Colors.blueGrey,
-                              )),
-                              Text(
-                                " or ",
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: CustomTheme.theme,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
-                              const Expanded(
+                              onPressed: _submitForm,
+                              child: Text(
+                                _isLogin ? "Login" : "Sign Up",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
                                   child: Divider(
-                                color: Colors.blueGrey,
+                                color: grey,
+                              )),
+                              const Text(
+                                " Or ",
+                                style: TextStyle(
+                                  color: CustomTheme.theme,
+                                ),
+                              ),
+                              Text(
+                                _isLogin ? "Login with " : "Sign Up with ",
+                                style: const TextStyle(
+                                  color: CustomTheme.theme,
+                                ),
+                              ),
+                              Expanded(
+                                  child: Divider(
+                                color: grey,
                               )),
                             ],
                           ),
                           const SizedBox(height: 10),
                           const SignInButton(),
                           const SizedBox(height: 10),
-                          const Divider(
-                            color: Colors.blueGrey,
+                          Divider(
+                            color: grey,
                           ),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _isLogin = !_isLogin;
-                              });
-                            },
-                            child: Text(
-                              _isLogin
-                                  ? "Don't have an Account? Register"
-                                  : 'I already have an account',
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                          const SizedBox(height: 20),
+                          TextButtonTheme(
+                            data: TextButtonThemeData(
+                              style: TextButton.styleFrom(
+                                backgroundColor: CustomTheme.themeAccent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isLogin = !_isLogin;
+                                });
+                              },
+                              child: Center(
+                                child: Text(
+                                  _isLogin
+                                      ? "Don't have an Account? Register"
+                                      : 'I already have an account',
+                                  style: const TextStyle(
+                                    color: CustomTheme.theme,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

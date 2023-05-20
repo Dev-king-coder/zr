@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:zr/screens/leaderboard.dart';
+import 'package:zr/screens/onboarding/screen1.dart';
+import 'package:zr/screens/profile.dart';
 import '../screens/splash_screen.dart';
-import '../screens/auth_screen.dart';
 import '../screens/home_screen.dart';
 
 class ScreenInitializer extends StatelessWidget {
@@ -17,10 +19,11 @@ class ScreenInitializer extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SplashScreen();
         }
+        // TODO: Add Dashboard screen
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const LeaderBoard();
         }
-        return const AuthScreen();
+        return const ScreenOne();
       },
     );
   }
