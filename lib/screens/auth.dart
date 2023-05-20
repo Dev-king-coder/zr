@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zr/components/gsign_in_button.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -26,17 +27,15 @@ class _AuthScreenState extends State<AuthScreen> {
     _formKey.currentState!.save();
     try {
       if (_isLogin) {
-        final userCred = await _firebase.signInWithEmailAndPassword(
+        await _firebase.signInWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
-        print(userCred);
       } else {
-        final userCred = await _firebase.createUserWithEmailAndPassword(
+        await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
-        print(userCred);
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -201,6 +200,32 @@ class _AuthScreenState extends State<AuthScreen> {
                             onPressed: _submitForm,
                             child: Text(_isLogin ? "Login" : "SignUp"),
                           ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: <Widget>[
+                              const Expanded(
+                                  child: Divider(
+                                color: Colors.blueGrey,
+                              )),
+                              Text(
+                                " or ",
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ),
+                              const Expanded(
+                                  child: Divider(
+                                color: Colors.blueGrey,
+                              )),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          const SignInButton(),
+                          const SizedBox(height: 10),
+                          const Divider(
+                            color: Colors.blueGrey,
+                          ),
                           TextButton(
                             onPressed: () {
                               setState(() {
@@ -209,7 +234,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                             child: Text(
                               _isLogin
-                                  ? 'Create an account'
+                                  ? "Don't have an Account? Register"
                                   : 'I already have an account',
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.onPrimary,
