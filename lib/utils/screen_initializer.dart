@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:zr/screens/onboarding/screen1.dart';
 import '../screens/splash_screen.dart';
 import '../screens/auth_screen.dart';
 import '../screens/home_screen.dart';
@@ -20,7 +21,7 @@ class ScreenInitializer extends StatelessWidget {
         if (snapshot.hasData) {
           return const HomeScreen();
         }
-        return const AuthScreen();
+        return const ScreenOne();
       },
     );
   }
