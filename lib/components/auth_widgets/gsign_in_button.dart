@@ -56,7 +56,7 @@ class _SignInButtonState extends State<SignInButton> {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Image.asset(
-                        'lib/assets/images/google_logo.png',
+                        'assets/google_logo.png',
                       ),
                     ),
                   ),
