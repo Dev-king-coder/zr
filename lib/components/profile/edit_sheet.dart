@@ -38,25 +38,26 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.95,
-                child: OutlinedButton.icon(
-                    onPressed: (){},
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                    ),
-                    icon: const Icon(Icons.add_a_photo_outlined),
-                    label: const Text('Photo')),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // SizedBox(
+              //   width: MediaQuery.of(context).size.width * 0.95,
+              //   child: OutlinedButton.icon(
+              //       onPressed: (){},
+              //       style: ButtonStyle(
+
+              //         foregroundColor:
+              //             MaterialStateProperty.all<Color>(Colors.black),
+              //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //           RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(10.0),
+              //           ),
+              //         ),
+              //       ),
+              //       icon: const Icon(Icons.add_a_photo_outlined),
+              //       label: const Text('Photo')),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(

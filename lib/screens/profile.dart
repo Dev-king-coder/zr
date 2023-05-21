@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zr/helpers/colors.dart';
@@ -7,11 +9,30 @@ import 'package:zr/widgets/profile_tile.dart';
 import '../components/profile/user_image_picker.dart';
 import '../components/profile/edit_sheet.dart';
 
-class Profile extends StatelessWidget {
+final auth = FirebaseAuth.instance;
+final User? user = auth.currentUser;
+
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  File? _pickedImage;
+
   void _signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
+    await auth.signOut();
+  }
+
+  void save() async {
+    final storageRef = FirebaseStorage.instance
+        .ref()
+        .child('user_images')
+        .child('${user!.uid}.jpg');
+    await storageRef.putFile(_pickedImage!);
+    final imageUrl = await storageRef.getDownloadURL();
   }
 
   @override
@@ -21,9 +42,9 @@ class Profile extends StatelessWidget {
         title: const Text('Profile'),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed:save,
             child: const Text(
-              'Save',
+              'Save Changes',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -39,18 +60,32 @@ class Profile extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Center(
+              Center(
                 child: Column(
                   children: [
-                    UserImagePicker(),
-                    SizedBox(
+                    UserImagePicker(
+                      imagePickFn: (pickedImage) {
+                        _pickedImage = pickedImage;
+                      },
+                    ),
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Rounak Agrawal',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                    InkWell(
+                      onDoubleTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => const EditProfileSheet(),
+                        );
+                      },
+                      child: Text(
+                        user != null
+                            ? user!.displayName.toString()
+                            : 'User Name',
+                        style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
