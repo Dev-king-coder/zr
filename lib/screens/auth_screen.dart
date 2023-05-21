@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:zr/helpers/colors.dart';
-import 'package:zr/components/auth_widgets/gsign_in_button.dart';
+import 'package:zr/components/auth/gsign_in_button.dart';
 import 'package:zr/helpers/dimensions.dart';
 
 final _firebase = FirebaseAuth.instance;

@@ -15,7 +15,6 @@ class _UserImagePickerState extends State<UserImagePicker> {
     final pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 100,
-      maxWidth: 150,
     );
     final pickedImageFile = File(pickedImage!.path);
     setState(() {
@@ -28,17 +27,15 @@ class _UserImagePickerState extends State<UserImagePicker> {
     return InkWell(
       onTap: _pickImage,
       child: CircleAvatar(
-          radius: 70,
-          backgroundColor: Colors.grey,
-          child: CircleAvatar(
-            radius: 65,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(65),
-              child: pickedImg == null
-                  ? const Icon(Icons.camera_enhance_rounded)
-                  : Image.file(pickedImg!),
-            ),
-          )),
+        radius: 70,
+        backgroundColor: Colors.grey,
+        child: CircleAvatar(
+          radius: 65,
+          backgroundImage: pickedImg != null
+              ? FileImage(pickedImg!)
+              : Image.asset('assets/profile.png').image,
+        ),
+      ),
     );
   }
 }

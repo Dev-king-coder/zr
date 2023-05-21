@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zr/helpers/colors.dart';
 import 'package:zr/widgets/achievements.dart';
 import 'package:zr/widgets/profile_tile.dart';
-import '../../widgets/user_image_picker.dart';
+import '../components/profile/user_image_picker.dart';
+import '../components/profile/edit_sheet.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -114,7 +115,12 @@ class Profile extends StatelessWidget {
               ProfileTile(
                 leading: FontAwesomeIcons.user,
                 title: 'Edit Profile',
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const EditProfileSheet(),
+                  );
+                },
               ),
               ProfileTile(
                 leading: FontAwesomeIcons.star,
