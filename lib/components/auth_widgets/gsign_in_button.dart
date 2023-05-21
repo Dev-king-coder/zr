@@ -21,7 +21,7 @@ class _SignInButtonState extends State<SignInButton> {
           content: Text("Sign in successful!"),
         ),
       );
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed('/');
     }
   }
 

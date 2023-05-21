@@ -4,8 +4,6 @@ import 'package:zr/helpers/colors.dart';
 import 'package:zr/components/auth_widgets/gsign_in_button.dart';
 import 'package:zr/helpers/dimensions.dart';
 
-import 'home_screen.dart';
-
 final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
@@ -54,13 +52,9 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
-  void redirector(){
-    if(_firebase.currentUser != null){
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
+  void redirector() {
+    if (_firebase.currentUser != null) {
+      Navigator.of(context).pushReplacementNamed('/');
     }
   }
 

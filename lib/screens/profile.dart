@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zr/helpers/colors.dart';
@@ -6,6 +7,10 @@ import 'package:zr/widgets/profile_tile.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
+
+  void _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +123,7 @@ class Profile extends StatelessWidget {
               ProfileTile(
                 leading: FontAwesomeIcons.arrowRightFromBracket,
                 title: 'Sign Out',
-                onTap: () {},
+                onTap: () => _signOut(context),
               ),
             ],
           ),
