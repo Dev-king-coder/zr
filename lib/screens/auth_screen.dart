@@ -4,6 +4,8 @@ import 'package:zr/helpers/colors.dart';
 import 'package:zr/components/auth_widgets/gsign_in_button.dart';
 import 'package:zr/helpers/dimensions.dart';
 
+import 'home_screen.dart';
+
 final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
@@ -40,12 +42,23 @@ class _AuthScreenState extends State<AuthScreen> {
           password: _enteredPassword,
         );
       }
+      redirector();
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error.message!),
           backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+    }
+  }
+
+  void redirector(){
+    if(_firebase.currentUser != null){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
         ),
       );
     }

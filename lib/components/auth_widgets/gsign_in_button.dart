@@ -1,9 +1,7 @@
-// ignore: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:zr/helpers/colors.dart';
 
+import 'package:zr/helpers/colors.dart';
 import '../../utils/gsign_auth.dart';
 
 class SignInButton extends StatefulWidget {
@@ -16,14 +14,27 @@ class SignInButton extends StatefulWidget {
 class _SignInButtonState extends State<SignInButton> {
   bool _isSignedIn = false;
 
+  void redirect(User? user) {
+    if (user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Sign in successful!"),
+        ),
+      );
+      Navigator.of(context).pushReplacementNamed('/home');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: _isSignedIn
-            ? const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              )
+            ? const Center(
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        CustomTheme.theme) //add primary colour to it
+                    ))
             : InkWell(
                 onTap: () async {
                   setState(() {
@@ -34,15 +45,7 @@ class _SignInButtonState extends State<SignInButton> {
                   setState(() {
                     _isSignedIn = false;
                   });
-
-                  if (user != null) {
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Sign in successful!"),
-                      ),
-                    );
-                  }
+                  redirect(user);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(6),

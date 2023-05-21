@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:zr/screens/auth_screen.dart';
+import 'package:zr/screens/home_screen.dart';
 import 'package:zr/screens/onboarding/screen1.dart';
 import 'package:zr/screens/onboarding/screen2.dart';
 import 'package:zr/screens/onboarding/screen3.dart';
+import 'package:zr/screens/profile.dart';
 import 'firebase_options.dart';
 import '../utils/screen_initializer.dart';
 
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const ScreenInitializer(),
+        '/home': (context) => const HomeScreen(),
+        '/settings': (context) => const Profile(),
         AuthScreen.routeName: (context) => const AuthScreen(),
         ScreenOne.routename: (context) => const ScreenOne(),
         ScreenTwo.routeName: (context) => const ScreenTwo(),

@@ -5,6 +5,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home Screen"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+            icon: const Icon(Icons.settings_suggest_outlined),
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text("Home Screen"),
+      ),
+    );
   }
 }
