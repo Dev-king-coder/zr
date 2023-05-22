@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/helpers/dimensions.dart';
 import 'package:zr/screens/onboarding/screen3.dart';
 import 'package:zr/widgets/skip_button.dart';
 
@@ -17,7 +18,7 @@ class ScreenTwo extends StatelessWidget {
           Stack(
             children: [
               SizedBox(
-                height: 600,
+                height: Dimensions.getHeight(context) * 0.65,
                 width: width,
                 child: Image.asset(
                   'assets/four.png',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/helpers/dimensions.dart';
 import 'package:zr/screens/auth_screen.dart';
 
 class ScreenThree extends StatelessWidget {
@@ -14,7 +15,7 @@ class ScreenThree extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 600,
+            height: Dimensions.getHeight(context) * 0.65,
             color: grey,
             width: width,
             child: Image.asset(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/helpers/dimensions.dart';
 import 'package:zr/screens/onboarding/screen2.dart';
 import 'package:zr/widgets/skip_button.dart';
 
@@ -17,7 +18,7 @@ class ScreenOne extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 600,
+                height: Dimensions.getHeight(context) * 0.65,
                 color: grey,
                 width: width + 30,
                 child: Image.asset(
