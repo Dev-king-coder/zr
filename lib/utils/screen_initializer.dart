@@ -26,7 +26,7 @@ class _ScreenInitializerState extends State<ScreenInitializer> {
         }
         // TODO: Add Dashboard screen
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const Dashbaord();
         }
         return const ScreenOne();
       },

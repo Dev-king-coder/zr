@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const ScreenInitializer(),
-        '/home': (context) => const HomeScreen(),
-        '/settings': (context) => const Profile(),
+        Dashbaord.routeName: (context) => const Dashbaord(),
+        Profile.routeName: (context) => const Profile(),
         AuthScreen.routeName: (context) => const AuthScreen(),
         ScreenOne.routename: (context) => const ScreenOne(),
         ScreenTwo.routeName: (context) => const ScreenTwo(),

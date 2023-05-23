@@ -13,6 +13,7 @@ final auth = FirebaseAuth.instance;
 final User? user = auth.currentUser;
 
 class Profile extends StatefulWidget {
+  static const routeName = '/profile';
   const Profile({super.key});
 
   @override
@@ -42,7 +43,7 @@ class _ProfileState extends State<Profile> {
         title: const Text('Profile'),
         actions: [
           TextButton(
-            onPressed:save,
+            onPressed: save,
             child: const Text(
               'Save Changes',
               style: TextStyle(
