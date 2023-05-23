@@ -95,7 +95,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                 ),
                 Container(
                   constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height * 2,
+                    maxHeight: MediaQuery.of(context).size.height,
                   ),
                   width: double.infinity,
 
