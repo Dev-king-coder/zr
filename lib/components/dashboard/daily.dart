@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:zr/helpers/colors.dart';
-import 'package:zr/widgets/dashboardcardtile.dart';
+import 'package:zr/widgets/dashboard_cardtile.dart';
 
 class DailyActivities extends StatelessWidget {
   const DailyActivities({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mrx_charts/mrx_charts.dart';
 import 'package:zr/widgets/chart.dart';
-import 'package:zr/widgets/previousactivities.dart';
+import 'package:zr/widgets/previous_activities.dart';
 
 class MonthlyActivities extends StatelessWidget {
   const MonthlyActivities({super.key});

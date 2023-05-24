@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zr/helpers/colors.dart';
-import 'package:zr/widgets/leaderboardranking.dart';
-import 'package:zr/widgets/leaderboardtile.dart';
+import 'package:zr/widgets/leaderboard_ranking.dart';
+import 'package:zr/widgets/leaderboard_tile.dart';
 
 class LeaderBoard extends StatelessWidget {
   const LeaderBoard({super.key});
