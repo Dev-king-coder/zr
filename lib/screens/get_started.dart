@@ -13,6 +13,7 @@ class GetStarted extends StatelessWidget {
         centerTitle: false,
         backgroundColor: Colors.white,
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: const Text(
           'Get Started',
           style: TextStyle(

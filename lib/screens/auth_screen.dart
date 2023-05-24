@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zr/helpers/colors.dart';
 import 'package:zr/components/auth/gsign_in_button.dart';
 import 'package:zr/helpers/dimensions.dart';
+import 'get_started.dart';
 
 FirebaseAuth _firebase = FirebaseAuth.instance;
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -20,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
   var _enteredEmail = '';
   var _enteredPassword = '';
+  int numTask = 0;
 
   bool _isLogin = true;
   bool _passwordVisibility = false;
@@ -46,6 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
           'email': _enteredEmail,
           'displayName': userCred.user!.email?.split('@')[0],
           'accCreated': 'standard',
+          'numTask': 0,
         });
       }
       redirector();
@@ -60,9 +63,27 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  void checkTask() async {
+    await firestore
+        .collection('users')
+        .doc(_firebase.currentUser!.uid)
+        .get()
+        .then((value) {
+      if (value.data()!['numTask'] == 0) {
+        numTask = 0;
+      }
+    });
+  }
+
   void redirector() {
-    if (_firebase.currentUser != null) {
-      Navigator.of(context).pushReplacementNamed('/');
+    checkTask();
+    print('numTask: $numTask');
+    if (numTask == 0) {
+      Navigator.of(context).pushReplacementNamed(GetStarted.routeName);
+    } else {
+      if (_firebase.currentUser != null) {
+        Navigator.of(context).pushReplacementNamed('/');
+      }
     }
   }
 

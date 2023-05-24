@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/screens/get_started.dart';
 import '../../../utils/gsign_auth.dart';
 
 class SignInButton extends StatefulWidget {
@@ -13,6 +14,19 @@ class SignInButton extends StatefulWidget {
 
 class _SignInButtonState extends State<SignInButton> {
   bool _isSignedIn = false;
+  int numTask=0;
+
+  void checkTask() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      if (value.data()!['numTask'] == 0) {
+        numTask = 0;
+      }
+    });
+  }
 
   void redirect(User? user) async {
     if (user != null) {
@@ -21,6 +35,7 @@ class _SignInButtonState extends State<SignInButton> {
         'imageUrl': user.photoURL,
         'email': user.email,
         'accCreated': 'google',
+        'numTask': 0
       });
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -28,8 +43,15 @@ class _SignInButtonState extends State<SignInButton> {
           content: Text("Sign in successful!"),
         ),
       );
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacementNamed('/');
+      checkTask();
+      print('numTask: $numTask');
+      if (numTask == 0) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacementNamed(GetStarted.routeName);
+      } else {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacementNamed('/');
+      }
     }
   }
 
