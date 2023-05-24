@@ -34,6 +34,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
     return Scaffold(
         backgroundColor: grey,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: grey,
           elevation: 0,
           centerTitle: false,
