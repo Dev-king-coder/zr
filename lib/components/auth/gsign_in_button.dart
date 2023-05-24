@@ -22,11 +22,13 @@ class _SignInButtonState extends State<SignInButton> {
         'email': user.email,
         'accCreated': 'google',
       });
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Sign in successful!"),
         ),
       );
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed('/');
     }
   }
