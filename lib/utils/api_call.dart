@@ -14,7 +14,7 @@ class ApiCall {
     return null;
   }
 
-  Future<String?> postData() async {
+  Future<String?> postData(prompt) async {
     String? apikey = await getKey();
     const url = 'https://api.openai.com/v1/chat/completions';
     final headers = {
@@ -24,7 +24,7 @@ class ApiCall {
     Map<String, Object> body = {
       "model": "gpt-3.5-turbo",
       "messages": [
-        {"role": "user", "content": "this is a test"}
+        {"role": "user", "content": prompt}
       ],
       "temperature": 0.1
     };
@@ -35,6 +35,7 @@ class ApiCall {
         final jsonRes = jsonDecode(response.body);
         // print(jsonRes['choices'][0]['message']['content'].split('\n  \\')[0]);
         // print(jsonRes['choices'][0]['message']['content']);
+        return jsonRes['choices'][0]['message']['content'];
       }
     } catch (e) {
       print(e);

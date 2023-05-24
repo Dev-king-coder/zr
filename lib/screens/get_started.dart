@@ -27,13 +27,15 @@ class _GetStartedState extends State<GetStarted> {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set({
+          .update({
         'numTask': 1,
         'task': task,
         'days': days,
         'hours': hours,
       });
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushReplacementNamed('/dashboard');
   }

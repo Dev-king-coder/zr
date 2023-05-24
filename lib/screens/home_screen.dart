@@ -104,7 +104,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                           width: 250,
                           child: Center(
                               child: Text(
-                            '75%\n Complete',
+                            '0%\n Complete',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
@@ -146,7 +146,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                                     height: 5,
                                   ),
                                   Text(
-                                    "Rounak Agrawal",
+                                    "Dev Keshwani",
                                     style: TextStyle(
                                       color: Colors.white,
                                     ),
@@ -154,7 +154,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                                 ],
                               ),
                               Text(
-                                "Points:\n1000",
+                                "Points:\n0",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -222,7 +222,9 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                           child: DashboardCardTile(
                             title: 'View Roadmap',
                             icon: FontAwesomeIcons.map,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, '/roadmap');
+                            },
                           ),
                         )
                       ],

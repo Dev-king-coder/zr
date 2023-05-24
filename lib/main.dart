@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:zr/components/dashboard/roadmap.dart';
 import 'package:zr/screens/auth_screen.dart';
 import 'package:zr/screens/get_started.dart';
 import 'package:zr/screens/home_screen.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         ScreenTwo.routeName: (context) => const ScreenTwo(),
         ScreenThree.routeName: (context) => const ScreenThree(),
         LeaderBoard.routeName: (context) => const LeaderBoard(),
+        RoadMap.routeName: (context) => const RoadMap(),
       },
     );
   }
