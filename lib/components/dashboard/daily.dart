@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/screens/leaderboard.dart';
 import 'package:zr/widgets/dashboard_cardtile.dart';
 
 class DailyActivities extends StatelessWidget {
@@ -105,26 +106,29 @@ class DailyActivities extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: DashboardCardTile(
-                title: 'My Tasks',
-                icon: Icons.task,
-                onTap: () {},
+        InkWell(
+          onTap: () => Navigator.pushNamed(context, LeaderBoard.routeName),
+          child: Row(
+            children: [
+              Expanded(
+                child: DashboardCardTile(
+                  title: "Today's Task",
+                  icon: Icons.task,
+                  onTap: () {},
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: DashboardCardTile(
-                title: 'Add Task',
-                icon: Icons.add_task,
-                onTap: () {},
+              const SizedBox(
+                width: 20,
               ),
-            )
-          ],
+              Expanded(
+                child: DashboardCardTile(
+                  title: 'All Tasks',
+                  icon: Icons.add_task,
+                  onTap: () {},
+                ),
+              )
+            ],
+          ),
         ),
         const SizedBox(
           height: 20,

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'package:zr/components/dashboard/daily.dart';
-import 'package:zr/components/dashboard/monthly.dart';
-import 'package:zr/components/dashboard/weekly.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:zr/helpers/colors.dart';
+import 'package:zr/screens/leaderboard.dart';
+import 'package:zr/screens/profile.dart';
+import 'package:zr/widgets/dashboard_cardtile.dart';
+// import 'package:temp/dashboard/daily.dart';
+// import 'package:temp/dashboard/monthly.dart';
+// import 'package:temp/dashboard/weekly.dart';
 
 class Dashbaord extends StatefulWidget {
   static const routeName = '/dashboard';
@@ -16,7 +20,6 @@ class Dashbaord extends StatefulWidget {
 class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
         backgroundColor: grey,
         appBar: AppBar(
@@ -32,7 +35,7 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
           ),
           actions: [
             InkWell(
-              onTap: () => Navigator.pushNamed(context, '/profile'),
+              onTap: () => Navigator.pushNamed(context, Profile.routeName),
               child: CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.white,
@@ -63,52 +66,193 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * .95,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Column(
-                    children: [
-                      TabBar(
-                        controller: tabController,
-                        labelColor: Colors.white,
-                        unselectedLabelColor: Colors.grey,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorPadding: const EdgeInsets.all(5.0),
-                        indicator: BoxDecoration(
-                          color: CustomTheme.theme,
-                          borderRadius: BorderRadius.circular(20),
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Stack(
+                      children: [
+                        CircularStepProgressIndicator(
+                          totalSteps: 100,
+                          currentStep: 75,
+                          stepSize: 10,
+                          selectedColor: CustomTheme.theme,
+                          unselectedColor: Colors.grey[200],
+                          padding: 0,
+                          width: 250,
+                          height: 250,
+                          selectedStepSize: 10,
+                          roundedCap: (_, __) => true,
                         ),
-                        labelStyle:
-                            const TextStyle(fontWeight: FontWeight.bold),
-                        unselectedLabelStyle:
-                            const TextStyle(fontWeight: FontWeight.normal),
-                        tabs: const [
-                          Tab(text: 'Daily'),
-                          Tab(text: 'Weekly'),
-                          Tab(text: 'Monthly'),
-                        ],
+                        const SizedBox(
+                          height: 250,
+                          width: 250,
+                          child: Center(
+                              child: Text(
+                            '75%\n Complete',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          )),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    InkWell(
+                      onTap: () =>
+                          Navigator.pushNamed(context, LeaderBoard.routeName),
+                      child: Card(
+                        shape: ShapeBorder.lerp(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          10,
+                        ),
+                        color: CustomTheme.theme,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage: NetworkImage(
+                                        "https://picsum.photos/200"),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Rounak Agrawal",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "Points:\n1000",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "Level:\nVetreran",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "Rank:\n3",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height,
-                  ),
-                  width: double.infinity,
-
-                  // color: Colors.red,
-                  child: TabBarView(
-                    controller: tabController,
-                    children: const [
-                      DailyActivities(),
-                      WeeklyActivities(),
-                      MonthlyActivities()
-                    ],
-                  ),
-                ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DashboardCardTile(
+                            title: 'My Tasks',
+                            icon: Icons.task,
+                            onTap: () {},
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: DashboardCardTile(
+                            title: 'Add Task',
+                            icon: Icons.add_task,
+                            onTap: () {},
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DashboardCardTile(
+                            title: 'My Goals',
+                            icon: FontAwesomeIcons.bullseye,
+                            onTap: () {},
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: DashboardCardTile(
+                            title: 'View Roadmap',
+                            icon: FontAwesomeIcons.map,
+                            onTap: () {},
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                )
+                // Container(
+                //   width: MediaQuery.of(context).size.width * .95,
+                //   height: 45,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(30),
+                //   ),
+                //   child: TabBar(
+                //     controller: tabController,
+                //     labelColor: Colors.white,
+                //     unselectedLabelColor: Colors.grey,
+                //     indicatorPadding: const EdgeInsets.all(5.0),
+                //     indicator: BoxDecoration(
+                //       color: theme,
+                //       borderRadius: BorderRadius.circular(40),
+                //     ),
+                //     labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                //     unselectedLabelStyle:
+                //         const TextStyle(fontWeight: FontWeight.normal),
+                //     tabs: const [
+                //       Tab(text: 'Daily'),
+                //       Tab(text: 'Weekly'),
+                //       Tab(text: 'Monthly'),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   height: MediaQuery.of(context).size.height,
+                //   // color: Colors.red,
+                //   child: TabBarView(
+                //     controller: tabController,
+                //     children: const [
+                //       DailyActivities(),
+                //       WeeklyActivities(),
+                //       MonthlyActivities()
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
