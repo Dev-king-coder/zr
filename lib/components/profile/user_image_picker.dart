@@ -24,6 +24,9 @@ class _UserImagePickerState extends State<UserImagePicker> {
         .collection('users')
         .doc(user!.uid)
         .get();
+    if(userData.data()?['imageUrl'] == null){
+      return;
+    }
     String imageUrl = userData.data()!['imageUrl'];
     if (pickedImg != null) {
       return;
