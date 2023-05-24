@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zr/helpers/colors.dart';
 import 'package:zr/screens/leaderboard.dart';
 import 'package:zr/screens/profile.dart';
@@ -18,6 +19,16 @@ class Dashbaord extends StatefulWidget {
 }
 
 class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
+  String accStatus = '';
+
+  firestoreData() async {
+    final DocumentSnapshot<Map<String, dynamic>> doc =
+        await firestore.collection('users').doc(user!.uid).get();
+    setState(() {
+      accStatus = doc.data()!['accCreated'].toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +37,11 @@ class _DashbaordState extends State<Dashbaord> with TickerProviderStateMixin {
           backgroundColor: grey,
           elevation: 0,
           centerTitle: false,
-          title: const Text(
-            "Welcome, Rounak",
-            style: TextStyle(
+          title: Text(
+            accStatus == 'standard' && user!.displayName == null
+                ? 'Welcome ${user!.email!.split('@')[0]}'
+                : 'Welcome ${user?.displayName?.split(' ')[0]}',
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
