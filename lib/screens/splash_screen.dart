@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        height: Dimensions.getHeight(context),
+        height: Dimensions.getHeight(context)*0.9,
         width: Dimensions.getWidth(context),
         child: Image.asset(
           'assets/splash-screen.gif',
