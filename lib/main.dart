@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:zr/screens/auth_screen.dart';
+import 'package:zr/screens/get_started.dart';
 import 'package:zr/screens/home_screen.dart';
+import 'package:zr/screens/leaderboard.dart';
 import 'package:zr/screens/onboarding/screen1.dart';
 import 'package:zr/screens/onboarding/screen2.dart';
 import 'package:zr/screens/onboarding/screen3.dart';
 import 'package:zr/screens/profile.dart';
+import 'package:zr/screens/splash_screen.dart';
 import 'firebase_options.dart';
 import '../utils/screen_initializer.dart';
 
@@ -31,13 +34,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => const ScreenInitializer(),
+        '/': (context) => const SplashScreen(),
+        ScreenInitializer.routeName: (context) => const ScreenInitializer(),
+        GetStarted.routeName: (context) => const GetStarted(),
         Dashbaord.routeName: (context) => const Dashbaord(),
         Profile.routeName: (context) => const Profile(),
         AuthScreen.routeName: (context) => const AuthScreen(),
         ScreenOne.routename: (context) => const ScreenOne(),
         ScreenTwo.routeName: (context) => const ScreenTwo(),
         ScreenThree.routeName: (context) => const ScreenThree(),
+        LeaderBoard.routeName: (context) => const LeaderBoard(),
       },
     );
   }

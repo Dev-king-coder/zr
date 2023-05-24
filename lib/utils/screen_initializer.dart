@@ -5,6 +5,7 @@ import 'package:zr/screens/home_screen.dart';
 import 'package:zr/screens/onboarding/screen1.dart';
 
 class ScreenInitializer extends StatefulWidget {
+  static const routeName = '/screen-initializer';
   const ScreenInitializer({
     Key? key,
   }) : super(key: key);

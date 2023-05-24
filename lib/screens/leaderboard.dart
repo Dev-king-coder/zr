@@ -4,6 +4,7 @@ import 'package:zr/widgets/leaderboard_ranking.dart';
 import 'package:zr/widgets/leaderboard_tile.dart';
 
 class LeaderBoard extends StatelessWidget {
+  static const routeName = '/leaderboard';
   const LeaderBoard({super.key});
 
   @override
