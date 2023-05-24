@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserImagePicker extends StatefulWidget {
   const UserImagePicker({super.key, required this.imagePickFn});
@@ -13,14 +15,34 @@ class UserImagePicker extends StatefulWidget {
 
 class _UserImagePickerState extends State<UserImagePicker> {
   File? pickedImg;
+  String imgUrl = '';
+
+  void firebaseData() async {
+    final auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
+    String imageUrl = userData.data()!['imageUrl'];
+    if (pickedImg != null) {
+      return;
+    }
+    setState(() {
+      imgUrl = imageUrl;
+    });
+  }
+
   void _pickImage() async {
     final pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 100,
     );
-    
+    if (pickedImage == null) {
+      return;
+    }
     setState(() {
-      pickedImg = File(pickedImage!.path);
+      pickedImg = File(pickedImage.path);
     });
 
     widget.imagePickFn(pickedImg!);
@@ -28,6 +50,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   @override
   Widget build(BuildContext context) {
+    firebaseData();
     return InkWell(
       onTap: _pickImage,
       child: CircleAvatar(
@@ -37,7 +60,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
           radius: 65,
           backgroundImage: pickedImg != null
               ? FileImage(pickedImg!)
-              : Image.asset('assets/profile.png').image,
+              // ignore: unnecessary_null_comparison
+              : imgUrl != null
+                  ? NetworkImage(imgUrl)
+                  : Image.asset('assets/profile.png').image,
         ),
       ),
     );

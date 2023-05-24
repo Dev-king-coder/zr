@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zr/helpers/colors.dart';
 import '../../../utils/gsign_auth.dart';
 
@@ -14,8 +14,14 @@ class SignInButton extends StatefulWidget {
 class _SignInButtonState extends State<SignInButton> {
   bool _isSignedIn = false;
 
-  void redirect(User? user) {
+  void redirect(User? user) async {
     if (user != null) {
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'displayName': user.displayName,
+        'imageUrl': user.photoURL,
+        'email': user.email,
+        'accCreated': 'google',
+      });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Sign in successful!"),

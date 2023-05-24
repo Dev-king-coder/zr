@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zr/helpers/colors.dart';
 import 'package:zr/components/auth/gsign_in_button.dart';
 import 'package:zr/helpers/dimensions.dart';
 
-final _firebase = FirebaseAuth.instance;
+FirebaseAuth _firebase = FirebaseAuth.instance;
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class AuthScreen extends StatefulWidget {
   static var routeName = 'authscreen';
@@ -35,10 +37,16 @@ class _AuthScreenState extends State<AuthScreen> {
           password: _enteredPassword,
         );
       } else {
-        await _firebase.createUserWithEmailAndPassword(
+        UserCredential userCred =
+            await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
+        await firestore.collection('users').doc(userCred.user!.uid).set({
+          'email': _enteredEmail,
+          'displayName': userCred.user!.email?.split('@')[0],
+          'accCreated': 'standard',
+        });
       }
       redirector();
     } on FirebaseAuthException catch (error) {
@@ -215,23 +223,22 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           const SizedBox(height: 30),
                           SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomTheme.theme,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: CustomTheme.theme,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
                                 ),
-                              ),
-                              onPressed: _submitForm,
-                              child: Text(
-                                _isLogin ? "Login" : "Sign Up",
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                onPressed: _submitForm,
+                                child: Text(
+                                  _isLogin ? "Login" : "Sign Up",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                           const SizedBox(height: 40),
                           Row(
                             children: <Widget>[

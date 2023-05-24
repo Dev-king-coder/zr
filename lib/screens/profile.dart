@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zr/helpers/colors.dart';
@@ -10,6 +11,7 @@ import '../components/profile/user_image_picker.dart';
 import '../components/profile/edit_sheet.dart';
 
 final auth = FirebaseAuth.instance;
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 final User? user = auth.currentUser;
 
 class Profile extends StatefulWidget {
@@ -22,9 +24,17 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   File? _pickedImage;
-
+  String accStatus = '';
   void _signOut(BuildContext context) async {
     await auth.signOut();
+  }
+
+  firestoreData() async {
+    final DocumentSnapshot<Map<String, dynamic>> doc =
+        await firestore.collection('users').doc(user!.uid).get();
+    setState(() {
+      accStatus = doc.data()!['accCreated'].toString();
+    });
   }
 
   void save() async {
@@ -34,10 +44,16 @@ class _ProfileState extends State<Profile> {
         .child('${user!.uid}.jpg');
     await storageRef.putFile(_pickedImage!);
     final imageUrl = await storageRef.getDownloadURL();
+
+    await firestore.collection('users').doc(user!.uid).set({
+      'displayName': user!.email?.split('@')[0],
+      'imageUrl': imageUrl,
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    firestoreData();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -80,9 +96,9 @@ class _ProfileState extends State<Profile> {
                         );
                       },
                       child: Text(
-                        user != null
-                            ? user!.displayName.toString()
-                            : 'User Name',
+                        accStatus == 'standard' && user!.displayName == null
+                            ? user!.email!.split('@')[0]
+                            : user?.displayName ?? 'User Name',
                         style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,

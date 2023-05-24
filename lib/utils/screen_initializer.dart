@@ -24,7 +24,6 @@ class _ScreenInitializerState extends State<ScreenInitializer> {
             child: CircularProgressIndicator(),
           );
         }
-        // TODO: Add Dashboard screen
         if (snapshot.hasData) {
           return const Dashbaord();
         }
